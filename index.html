@@ -284,5 +284,42 @@ footer .brand{margin-bottom:6px}
     if(e.key==='ArrowLeft')lbS.scrollBy({left:-lbS.clientWidth,behavior:'smooth'})});
 })();
 </script>
+<script>
+/* Contador de visitas y clics de WhatsApp (sin cookies ni datos personales) */
+(function(){
+  try{
+    var URL_EV='https://jbojoeifhrdjyqvfbapd.supabase.co/rest/v1/landing_events',
+        KEY='sb_publishable_UXO8yRZbDuQtBstizm7nGg_hu30f373';
+    function enviar(ev,boton){
+      try{
+        fetch(URL_EV,{method:'POST',keepalive:true,mode:'cors',credentials:'omit',
+          headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+          body:JSON.stringify({page:'la-naval',event:ev,button:boton||null,referrer:document.referrer||'',ua:navigator.userAgent})
+        }).catch(function(){});
+      }catch(e){}
+    }
+    function nombre(a){
+      try{
+        if(a.id)return a.id;
+        if(a.closest('header'))return 'cabecera';
+        if(a.closest('.card'))return 'precio';
+        if(a.closest('.sticky'))return 'flotante';
+        if(a.closest('.final'))return 'final';
+        var b=[].slice.call(document.querySelectorAll('main .cta-block')),i=b.indexOf(a.closest('.cta-block'));
+        if(i===0)return 'galeria';
+        if(i===1)return 'caracteristicas';
+        return (a.textContent||'').trim().slice(0,60)||null;
+      }catch(e){return null}
+    }
+    enviar('page_view',null);
+    document.addEventListener('click',function(e){
+      try{
+        var a=e.target&&e.target.closest&&e.target.closest('a[href*="wa.me/34642734058"]');
+        if(a)enviar('whatsapp_click',nombre(a));
+      }catch(err){}
+    },true);
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
