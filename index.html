@@ -117,6 +117,31 @@ footer .brand{margin-bottom:6px}
 .final h2{color:#fff;margin:0 0 6px}
 .final p{margin:0 0 16px;color:#d9d2c3}
 
+/* ---------- Formulario corto ---------- */
+.lead{border:1px solid var(--line);border-radius:16px;padding:22px 20px;background:var(--cream);margin:0 0 18px}
+.final .lead h2{margin:0 0 4px;font-size:1.35rem;line-height:1.3;color:var(--ink)}
+.final .lead p{margin:0;color:var(--ink)}
+.final .lead .lead-sub{margin:0 0 14px;color:var(--stone);font-size:.95rem}
+.lead .campos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lead label.campo{display:block;font-weight:500;font-size:.95rem}
+.lead input[type=text],.lead input[type=tel]{display:block;width:100%;margin-top:4px;padding:12px 14px;font:inherit;font-size:1rem;
+  color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:10px;min-height:48px}
+.lead input:focus-visible{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.lead .acepto{display:flex;gap:10px;align-items:flex-start;margin:14px 0 0;font-size:.9rem;line-height:1.45;color:var(--stone)}
+.lead .acepto input{width:20px;height:20px;margin:1px 0 0;flex:none;accent-color:var(--ink)}
+.lead .acepto a{color:var(--ink)}
+.lead .trampa{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.lead .enviar{display:block;width:100%;margin-top:16px;padding:15px 20px;min-height:54px;border:1px solid var(--gold);border-radius:12px;
+  background:var(--ink);color:var(--gold);font:600 1.05rem 'Jost',system-ui,sans-serif;letter-spacing:.02em;cursor:pointer}
+.lead .enviar:hover,.lead .enviar:focus-visible{background:#2a2621}
+.lead .enviar:disabled{opacity:.6;cursor:wait}
+.final .lead .error{color:#9b2c1f;font-size:.9rem;margin:10px 0 0}
+.lead .resultado{margin:12px 0 0;font-size:1rem}
+.final .lead .resultado p{margin:0 0 6px}
+.lead .resultado a{color:var(--gold-deep);font-size:.92rem}
+.lead .ok{font-weight:600}
+@media (max-width:560px){.lead .campos{grid-template-columns:1fr}}
+
 /* ---------- Visor a pantalla completa ---------- */
 .lb{position:fixed;inset:0;background:#000;z-index:100;display:none;flex-direction:column}
 .lb.open{display:flex}
@@ -148,7 +173,7 @@ footer .brand{margin-bottom:6px}
 
 <header>
   <div class="brand">URBACAN<small>REAL ESTATE</small></div>
-  <a class="wa sm" href="https://wa.me/34642734058?text=Hola%2C%20me%20interesa%20el%20piso%20de%20La%20Naval%2C%2080" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ico-wa"/></svg><span class="t">Pedir visita</span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">por WhatsApp</span></a>
+  <a class="wa sm" href="https://wa.me/34642734058?text=Hola%2C%20me%20gustar%C3%ADa%20visitar%20el%20piso%20de%20la%20calle%20La%20Naval%2C%2080%20%28Las%20Palmas%29" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ico-wa"/></svg><span class="t">Pedir visita</span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">por WhatsApp</span></a>
 </header>
 
 <main>
@@ -199,7 +224,7 @@ footer .brand{margin-bottom:6px}
 
 <div class="cta-block">
   <p>Coordinamos la visita cuando mejor le venga.</p>
-  <a class="wa" id="caracteristicas" href="https://wa.me/34642734058?text=Hola%2C%20me%20interesa%20el%20piso%20de%20La%20Naval%2C%2080" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ico-wa"/></svg><span class="t">Pedir visita por WhatsApp</span></a>
+  <a class="wa" id="caracteristicas" href="https://wa.me/34642734058?text=Hola%2C%20me%20gustar%C3%ADa%20visitar%20el%20piso%20de%20la%20calle%20La%20Naval%2C%2080%20%28Las%20Palmas%29" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ico-wa"/></svg><span class="t">Visitar el piso de la calle La Naval, 80</span></a>
 </div>
 
 <h2>Ubicación</h2>
@@ -216,10 +241,23 @@ footer .brand{margin-bottom:6px}
 </main>
 
 <section class="final">
+  <form class="lead" id="lead" novalidate>
+    <h2>¿Prefieres que te escribamos nosotros?</h2>
+    <p class="lead-sub">Déjanos tu nombre y teléfono y te contactamos para la visita.</p>
+    <div class="campos">
+      <label class="campo">Nombre<input type="text" name="nombre" autocomplete="name" required maxlength="80"></label>
+      <label class="campo">Teléfono<input type="tel" name="telefono" inputmode="numeric" autocomplete="tel" required maxlength="20"></label>
+    </div>
+    <div class="trampa" aria-hidden="true"><label>No rellenar<input type="text" name="web" tabindex="-1" autocomplete="off"></label></div>
+    <label class="acepto"><input type="checkbox" name="acepto" required><span id="texto-acepto">Acepto que Urbacan Real Estate me contacte por WhatsApp o teléfono sobre este piso. Más información en la <a href="https://urbacanrealestate.com/politica-privacidad" target="_blank" rel="noopener">Política de privacidad</a></span></label>
+    <p class="error" id="leadError" role="alert" hidden></p>
+    <button class="enviar" type="submit">Quiero que me escribáis</button>
+    <div class="resultado" id="leadRes" role="status" hidden></div>
+  </form>
   <div class="box">
     <h2>Piso en La Naval, 80 · <span style="white-space:nowrap">235.000 €</span></h2>
     <p>Escríbanos por WhatsApp y le enviamos más información o le reservamos una visita.</p>
-    <a class="wa" href="https://wa.me/34642734058?text=Hola%2C%20me%20interesa%20el%20piso%20de%20La%20Naval%2C%2080" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ico-wa"/></svg><span class="t">Pedir visita por WhatsApp</span></a>
+    <a class="wa" href="https://wa.me/34642734058?text=Hola%2C%20me%20gustar%C3%ADa%20visitar%20el%20piso%20de%20la%20calle%20La%20Naval%2C%2080%20%28Las%20Palmas%29" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ico-wa"/></svg><span class="t">Visitar el piso de la calle La Naval, 80</span></a>
   </div>
 </section>
 
@@ -301,6 +339,51 @@ footer .brand{margin-bottom:6px}
         if(a)enviar('whatsapp_click',nombre(a));
       }catch(err){}
     },true);
+  }catch(e){}
+})();
+</script>
+<script>
+/* Formulario corto: guarda nombre y teléfono en Supabase (sin cookies) */
+(function(){
+  try{
+    var f=document.getElementById('lead');if(!f)return;
+    var URL_LEADS='https://jbojoeifhrdjyqvfbapd.supabase.co/rest/v1/landing_leads',
+        KEY='sb_publishable_UXO8yRZbDuQtBstizm7nGg_hu30f373',
+        WA_URL='https://wa.me/34642734058?text=Hola%2C%20me%20gustar%C3%ADa%20visitar%20el%20piso%20de%20la%20calle%20La%20Naval%2C%2080%20%28Las%20Palmas%29',
+        TEXTO='Acepto que Urbacan Real Estate me contacte por WhatsApp o teléfono sobre este piso. Más información en la Política de privacidad',
+        err=document.getElementById('leadError'),res=document.getElementById('leadRes'),btn=f.querySelector('.enviar');
+    function aviso(t){err.textContent=t;err.hidden=!t}
+    function enlaceWa(txt){return '<a id="formulario" href="'+WA_URL+'" target="_blank" rel="noopener">'+txt+'</a>'}
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      try{
+        aviso('');
+        var nombre=(f.nombre.value||'').trim(),tel=(f.telefono.value||'').trim(),dig=tel.replace(/\D/g,'');
+        if(f.web.value){f.reset();res.innerHTML='<p class="ok">Gracias, te escribiremos en breve</p>';res.hidden=false;return}
+        if(nombre.length<2){aviso('Escribe tu nombre.');f.nombre.focus();return}
+        if(dig.length<9){aviso('Revisa el teléfono: debe tener al menos 9 dígitos.');f.telefono.focus();return}
+        if(!f.acepto.checked){aviso('Para poder escribirte, marca la casilla de aceptación.');f.acepto.focus();return}
+        btn.disabled=true;btn.textContent='Enviando…';
+        fetch(URL_LEADS,{method:'POST',mode:'cors',credentials:'omit',
+          headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+          body:JSON.stringify({page:'la-naval',name:nombre,phone:tel,consent:true,consent_text:TEXTO,ua:navigator.userAgent,referrer:document.referrer||''})
+        }).then(function(r){
+          if(r.status===201){
+            [].forEach.call(f.querySelectorAll('.campos,.acepto,.enviar,.lead-sub'),function(el){el.hidden=true;el.style.display='none'});
+            res.innerHTML='<p class="ok">Gracias, te escribiremos en breve</p><p>'+enlaceWa('¿Prefieres escribirnos ya por WhatsApp?')+'</p>';
+            res.hidden=false;
+          }else{throw new Error('estado '+r.status)}
+        }).catch(function(){
+          btn.disabled=false;btn.textContent='Quiero que me escribáis';
+          aviso('Vaya, no hemos podido enviar tus datos ahora mismo. Puedes intentarlo de nuevo o escribirnos directamente por WhatsApp.');
+          res.innerHTML='<p>'+enlaceWa('Escribir por WhatsApp')+'</p>';res.hidden=false;
+        });
+      }catch(x){
+        try{btn.disabled=false;btn.textContent='Quiero que me escribáis';
+          aviso('Vaya, algo ha fallado. Puedes escribirnos directamente por WhatsApp.');
+          res.innerHTML='<p>'+enlaceWa('Escribir por WhatsApp')+'</p>';res.hidden=false;}catch(y){}
+      }
+    });
   }catch(e){}
 })();
 </script>
